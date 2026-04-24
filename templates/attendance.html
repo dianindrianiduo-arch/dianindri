@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% block title %}Absensi Kelas {{ kelas.name }}{% endblock %}
+
+{% block head %}
+<style>
+  .student-row:hover { background: #f0f7ff; }
+  .status-btn input[type=radio] { display: none; }
+  .status-btn label {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 2px solid #dee2e6;
+    cursor: pointer;
+    font-size: .8rem;
+    font-weight: 600;
+    transition: .15s;
+    user-select: none;
+  }
+  .status-btn input[value=H]:checked + label { background: #198754; color: #fff; border-color: #198754; }
+  .status-btn input[value=I]:checked + label { background: #ffc107; color: #000; border-color: #ffc107; }
+  .status-btn input[value=S]:checked + label { background: #0dcaf0; color: #000; border-color: #0dcaf0; }
+  .status-btn input[value=A]:checked + label { background: #dc3545; color: #fff; border-color: #dc3545; }
+  .status-btn label:hover { opacity: .85; }
+  .sticky-header { position: sticky; top: 0; background: #fff; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,.05); }
+  #searchInput { max-width: 240px; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-start mb-3 flex-wrap gap-2">
+  <div>
+    <h4 class="mb-0 fw-bold"><i class="bi bi-check2-square text-primary me-2"></i>Absensi Kelas {{ kelas.name }}</h4>
+    <small class="text-muted">{{ students|length }} murid</small>
+  </div>
+  <div class="d-flex gap-2 align-items-center flex-wrap">
+    <input type="date" id="datePickerTop" class="form-control form-control-sm" value="{{ att_date.isoformat() }}"
+           onchange="location.href='/attendance/{{ kelas.id }}?date='+this.value">
+    <a href="/classes" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i> Kembali</a>
+  </div>
+</div>
+
+<!-- Quick action bar -->
+<div class="card mb-3">
+  <div class="card-body py-2 d-flex flex-wrap gap-2 align-items-center">
+    <span class="text-muted small fw-semibold me-2">Tandai semua:</span>
+    <button type="button" class="btn btn-sm btn-success" onclick="setAll('H')">Hadir Semua</button>
+    <button type="button" class="btn btn-sm btn-warning" onclick="setAll('I')">Izin Semua</button>
+    <button type="button" class="btn btn-sm btn-info" onclick="setAll('S')">Sakit Semua</button>
+    <button type="button" class="btn btn-sm btn-danger" onclick="setAll('A')">Alpha Semua</button>
+    <div class="ms-auto">
+      <input id="searchInput" type="text" class="form-control form-control-sm" placeholder="Cari nama murid...">
+    </div>
+  </div>
+</div>
+
+<form method="post" id="attendanceForm">
+  <input type="hidden" name="att_date" value="{{ att_date.isoformat() }}">
+
+  <!-- Summary bar -->
+  <div class="d-flex gap-3 mb-3 flex-wrap">
+    <span class="badge bg-success fs-6 px-3" id="cnt-H">H: 0</span>
+    <span class="badge bg-warning text-dark fs-6 px-3" id="cnt-I">I: 0</span>
+    <span class="badge bg-info text-dark fs-6 px-3" id="cnt-S">S: 0</span>
+    <span class="badge bg-danger fs-6 px-3" id="cnt-A">A: 0</span>
+  </div>
+
+  <div class="card">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle" id="studentTable">
+        <thead class="table-light sticky-header">
+          <tr>
+            <th style="width:40px">#</th>
+            <th>Nama Murid</th>
+            <th class="text-center" style="width:220px">Status</th>
+            <th style="width:180px">Catatan</th>
+            <th class="text-center" style="width:60px">WA</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          {% set att = existing_att.get(student.id) %}
+          {% set cur_status = att.status if att else 'H' %}
+          <tr class="student-row" data-name="{{ student.name.lower() }}">
+            <td class="text-muted small">{{ loop.index }}</td>
+            <td>
+              <div class="fw-semibold">{{ student.name }}</div>
+              <div class="small text-muted">NIS: {{ student.nis }} &bull; {{ 'L' if student.gender == 'L' else 'P' }}</div>
+            </td>
+            <td>
+              <div class="d-flex gap-1 justify-content-center status-btn">
+                {% for s, label in [('H','Hadir'),('I','Izin'),('S','Sakit'),('A','Alpha')] %}
+                <input type="radio" name="status_{{ student.id }}" id="s{{ student.id }}_{{ s }}"
+                       value="{{ s }}" {% if cur_status == s %}checked{% endif %}
+                       onchange="updateCounts()">
+                <label for="s{{ student.id }}_{{ s }}">{{ label }}</label>
+                {% endfor %}
+              </div>
+            </td>
+            <td>
+              <input type="text" name="notes_{{ student.id }}" class="form-control form-control-sm"
+                     placeholder="Keterangan..." value="{{ att.notes if att else '' }}" maxlength="100">
+            </td>
+            <td class="text-center">
+              {% if att and att.wa_sent %}
+                <i class="bi bi-whatsapp text-success" title="WA terkirim"></i>
+              {% elif att %}
+                <i class="bi bi-whatsapp text-muted" title="Belum terkirim"></i>
+              {% else %}
+                <i class="bi bi-dash text-muted"></i>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-4 flex-wrap gap-2">
+    <a href="/classes" class="btn btn-outline-secondary"><i class="bi bi-arrow-left"></i> Batal</a>
+    <button type="submit" class="btn btn-primary btn-lg px-5">
+      <i class="bi bi-send-fill me-2"></i>Simpan & Kirim WA
+    </button>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function updateCounts() {
+  const counts = {H:0, I:0, S:0, A:0};
+  document.querySelectorAll('input[type=radio]:checked').forEach(r => {
+    if (counts[r.value] !== undefined) counts[r.value]++;
+  });
+  document.getElementById('cnt-H').textContent = 'H: ' + counts.H;
+  document.getElementById('cnt-I').textContent = 'I: ' + counts.I;
+  document.getElementById('cnt-S').textContent = 'S: ' + counts.S;
+  document.getElementById('cnt-A').textContent = 'A: ' + counts.A;
+}
+
+function setAll(status) {
+  document.querySelectorAll('tr.student-row').forEach(row => {
+    if (row.style.display === 'none') return;
+    const radio = row.querySelector(`input[value="${status}"]`);
+    if (radio) radio.checked = true;
+  });
+  updateCounts();
+}
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('tr.student-row').forEach(row => {
+    row.style.display = row.dataset.name.includes(q) ? '' : 'none';
+  });
+});
+
+updateCounts();
+</script>
+{% endblock %}

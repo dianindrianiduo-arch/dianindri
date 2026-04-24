@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block title %}Pengaturan{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <h4 class="fw-bold mb-4"><i class="bi bi-gear-fill text-primary me-2"></i>Pengaturan Aplikasi</h4>
+
+    <form method="post">
+      <!-- Sekolah -->
+      <div class="card mb-4">
+        <div class="card-header border-0 pt-3 px-4"><h6 class="fw-bold mb-0">Informasi Sekolah</h6></div>
+        <div class="card-body px-4 pb-4">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Nama Sekolah</label>
+            <input type="text" name="school_name" class="form-control" value="{{ s.school_name }}">
+          </div>
+        </div>
+      </div>
+
+      <!-- Fonnte -->
+      <div class="card mb-4">
+        <div class="card-header border-0 pt-3 px-4">
+          <h6 class="fw-bold mb-0"><i class="bi bi-whatsapp text-success me-1"></i>Konfigurasi WhatsApp (Fonnte)</h6>
+        </div>
+        <div class="card-body px-4 pb-4">
+          <div class="alert alert-info small">
+            Daftar di <strong>fonnte.com</strong> untuk mendapatkan token API WhatsApp.
+            Token diperlukan agar notifikasi dapat dikirim ke wali murid.
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">Token Fonnte API</label>
+            <input type="text" name="fonnte_token" class="form-control font-monospace"
+                   value="{{ s.fonnte_token }}" placeholder="Token dari fonnte.com">
+          </div>
+          <div class="form-check">
+            <input type="checkbox" name="notify_hadir" id="notify_hadir" class="form-check-input"
+                   {% if s.notify_hadir %}checked{% endif %}>
+            <label class="form-check-label" for="notify_hadir">
+              Kirim notifikasi untuk murid yang <strong>HADIR</strong> juga
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Template Pesan -->
+      <div class="card mb-4">
+        <div class="card-header border-0 pt-3 px-4">
+          <h6 class="fw-bold mb-0">Template Pesan WhatsApp</h6>
+          <small class="text-muted">Variabel: {parent_name} {student_name} {class_name} {date} {notes} {school_name}</small>
+        </div>
+        <div class="card-body px-4 pb-4">
+          {% for key, label, cls in [
+            ('wa_message_hadir','Pesan HADIR','success'),
+            ('wa_message_izin','Pesan IZIN','warning'),
+            ('wa_message_sakit','Pesan SAKIT','info'),
+            ('wa_message_alpha','Pesan ALPHA','danger')
+          ] %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold text-{{ cls }}">{{ label }}</label>
+            <textarea name="{{ key }}" class="form-control font-monospace" rows="5"
+                      style="font-size:.82rem">{{ s[key] }}</textarea>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary px-5">
+          <i class="bi bi-save me-1"></i>Simpan Pengaturan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

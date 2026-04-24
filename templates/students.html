@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %}Data Murid{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+  <h4 class="mb-0 fw-bold"><i class="bi bi-people-fill text-primary me-2"></i>Data Murid</h4>
+  <a href="/students/new" class="btn btn-primary"><i class="bi bi-person-plus-fill me-1"></i>Tambah Murid</a>
+</div>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <form method="get" class="row g-2 align-items-end">
+      <div class="col-md-4">
+        <input type="text" name="q" class="form-control" placeholder="Cari nama murid..." value="{{ search }}">
+      </div>
+      <div class="col-md-3">
+        <select name="class_id" class="form-select">
+          <option value="">Semua Kelas</option>
+          {% for kelas in all_classes %}
+          <option value="{{ kelas.id }}" {% if kelas.id == selected_class %}selected{% endif %}>
+            Kelas {{ kelas.name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-primary w-100">Cari</button>
+      </div>
+      <div class="col-md-2">
+        <a href="/students" class="btn btn-outline-secondary w-100">Reset</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header border-0 bg-transparent">
+    <small class="text-muted">Menampilkan {{ students|length }} murid</small>
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0 align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>NIS</th>
+            <th>Nama Murid</th>
+            <th>L/P</th>
+            <th>Kelas</th>
+            <th>Nama Wali</th>
+            <th>No. WA Wali</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <tr>
+            <td class="text-muted small">{{ student.nis }}</td>
+            <td class="fw-semibold">{{ student.name }}</td>
+            <td>
+              <span class="badge {% if student.gender == 'L' %}bg-primary{% else %}bg-danger{% endif %}">
+                {{ student.gender }}
+              </span>
+            </td>
+            <td>{{ student.kelas.name }}</td>
+            <td class="small">{{ student.parent_name or '-' }}</td>
+            <td class="small">{{ student.parent_phone or '-' }}</td>
+            <td>
+              <div class="d-flex gap-1">
+                <a href="/students/{{ student.id }}/edit" class="btn btn-sm btn-outline-primary py-0 px-2">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <form method="post" action="/students/{{ student.id }}/delete"
+                      onsubmit="return confirm('Hapus {{ student.name }}?')">
+                  <button class="btn btn-sm btn-outline-danger py-0 px-2">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </form>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+          {% if not students %}
+          <tr><td colspan="7" class="text-center text-muted py-4">Tidak ada data murid.</td></tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
