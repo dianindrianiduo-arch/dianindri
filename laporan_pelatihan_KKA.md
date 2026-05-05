@@ -40,7 +40,7 @@ Telah selesai dilaksanakan dan laporan ini disahkan sebagai bukti pertanggungjaw
 
 &nbsp;
 
-[KOTA], ............... 2025
+Ambulu, 30 April 2026
 
 &nbsp;
 
@@ -78,7 +78,7 @@ Semoga laporan ini dapat bermanfaat bagi semua pihak yang membutuhkan.
 
 &nbsp;
 
-Ambulu, ............... 2025
+Ambulu, 30 April 2026
 
 Penulis,
 
