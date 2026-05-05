@@ -12,14 +12,14 @@
 
 **Disusun oleh:**
 
-[NAMA PESERTA]
+Roseno Afandi, S.E.
 NIP. [NIP]
 
 &nbsp;
 
 **Unit Kerja:**
-[NAMA SEKOLAH]
-[ALAMAT SEKOLAH]
+SMK 1 Pancasila Ambulu
+Ambulu, Kabupaten Jember
 
 &nbsp;
 
@@ -33,11 +33,11 @@ Yang bertanda tangan di bawah ini menyatakan bahwa laporan kegiatan **Pelatihan 
 
 | | |
 |---|---|
-| **Nama** | : [NAMA PESERTA] |
+| **Nama** | : Roseno Afandi, S.E. |
 | **NIP** | : [NIP] |
 | **Pangkat/Golongan** | : [PANGKAT/GOLONGAN] |
-| **Jabatan** | : Guru [Mata Pelajaran] |
-| **Unit Kerja** | : [NAMA SEKOLAH] |
+| **Jabatan** | : Guru |
+| **Unit Kerja** | : SMK 1 Pancasila Ambulu |
 
 Telah selesai dilaksanakan dan laporan ini disahkan sebagai bukti pertanggungjawaban pelaksanaan kegiatan pelatihan.
 
@@ -55,7 +55,7 @@ Telah selesai dilaksanakan dan laporan ini disahkan sebagai bukti pertanggungjaw
 | | |
 | | |
 | | |
-| [NAMA KEPALA SEKOLAH] | [NAMA PESERTA] |
+| Luluk Farida, S.Sos | Roseno Afandi, S.E. |
 | NIP. [NIP] | NIP. [NIP] |
 
 ---
@@ -72,21 +72,22 @@ Penulis menyadari bahwa laporan ini masih jauh dari sempurna. Oleh karena itu, p
 
 Akhir kata, penulis mengucapkan terima kasih yang sebesar-besarnya kepada semua pihak yang telah membantu dan mendukung penyelesaian laporan ini, khususnya kepada:
 1. Kepala SMKN 5 Jember selaku tuan rumah penyelenggara kegiatan;
-2. Para narasumber dan fasilitator yang telah memberikan ilmu dan bimbingan selama pelatihan;
-3. Kepala sekolah yang telah memberikan izin dan dukungan kepada penulis;
+2. Bapak Abdul Rohim dan Bapak Aditya selaku narasumber yang telah memberikan ilmu dan bimbingan selama pelatihan;
+3. Kepala SMK 1 Pancasila Ambulu, Ibu Luluk Farida, S.Sos, yang telah memberikan izin dan dukungan kepada penulis;
 4. Rekan-rekan peserta pelatihan yang telah memberikan semangat dan kerja sama yang baik.
+5. Rekan-rekan peserta pelatihan dari 32 sekolah SLTA se-Kabupaten Jember yang telah memberikan semangat dan kerja sama yang baik.
 
 Semoga laporan ini dapat bermanfaat bagi semua pihak yang membutuhkan.
 
 &nbsp;
 
-[KOTA], ............... 2025
+Ambulu, ............... 2025
 
 Penulis,
 
 &nbsp;
 
-[NAMA PESERTA]
+Roseno Afandi, S.E.
 
 ---
 
@@ -402,19 +403,17 @@ Pelatihan KKA disampaikan oleh narasumber dan fasilitator yang kompeten di bidan
 
 | No. | Nama | Instansi/Jabatan |
 |-----|------|-----------------|
-| 1. | [Nama Narasumber 1] | [Jabatan/Instansi] |
-| 2. | [Nama Narasumber 2] | [Jabatan/Instansi] |
-| 3. | [Nama Fasilitator 1] | [Jabatan/Instansi] |
-| dst. | ... | ... |
+| 1. | Abdul Rohim | [Jabatan/Instansi] |
+| 2. | Aditya | [Jabatan/Instansi] |
 
 ### 2.4 Peserta Pelatihan
 
-Pelatihan KKA diikuti oleh guru-guru SMK dari berbagai sekolah di wilayah [Kabupaten/Kota], dengan rincian sebagai berikut:
+Pelatihan KKA diikuti oleh guru-guru dari berbagai sekolah SLTA se-Kabupaten Jember, dengan rincian sebagai berikut:
 
 | | |
 |---|---|
-| **Jumlah Peserta** | : ........... orang |
-| **Asal Sekolah** | : Berbagai SMK di wilayah ........... |
+| **Jumlah Peserta** | : 32 orang |
+| **Asal Sekolah** | : SLTA Se-Kabupaten Jember |
 | **Mata Pelajaran** | : Beragam, sesuai bidang keahlian masing-masing |
 
 ---
