@@ -13,7 +13,6 @@
 **Disusun oleh:**
 
 Roseno Afandi, S.E.
-NIP. [NIP]
 
 &nbsp;
 
@@ -34,8 +33,6 @@ Yang bertanda tangan di bawah ini menyatakan bahwa laporan kegiatan **Pelatihan 
 | | |
 |---|---|
 | **Nama** | : Roseno Afandi, S.E. |
-| **NIP** | : [NIP] |
-| **Pangkat/Golongan** | : [PANGKAT/GOLONGAN] |
 | **Jabatan** | : Guru |
 | **Unit Kerja** | : SMK 1 Pancasila Ambulu |
 
@@ -56,7 +53,7 @@ Telah selesai dilaksanakan dan laporan ini disahkan sebagai bukti pertanggungjaw
 | | |
 | | |
 | Luluk Farida, S.Sos | Roseno Afandi, S.E. |
-| NIP. [NIP] | NIP. [NIP] |
+| | |
 
 ---
 
