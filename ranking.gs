@@ -17,7 +17,18 @@
 function setupRanking() {
 
   var form = FormApp.getActiveForm();
-  var ss   = SpreadsheetApp.openById(form.getDestinationId());
+
+  // Jika form belum terhubung ke spreadsheet, buat baru otomatis
+  var ss;
+  var destId = form.getDestinationId();
+  if (!destId) {
+    ss = SpreadsheetApp.create("Rekrutmen SMK 1 Pancasila Ambulu");
+    form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+    Utilities.sleep(3000); // Tunggu Google selesai setup link
+    Logger.log("📄 Spreadsheet baru dibuat: " + ss.getUrl());
+  } else {
+    ss = SpreadsheetApp.openById(destId);
+  }
 
   // Hapus sheet lama jika ada, lalu buat baru
   var existing = ss.getSheetByName("RANKING");
@@ -60,8 +71,13 @@ function setupRanking() {
 // ── Update ranking (bisa dijalankan manual kapan saja) ─────
 function updateRanking() {
 
-  var form  = FormApp.getActiveForm();
-  var ss    = SpreadsheetApp.openById(form.getDestinationId());
+  var form   = FormApp.getActiveForm();
+  var destId = form.getDestinationId();
+  if (!destId) {
+    Logger.log("❌ Belum ada spreadsheet. Jalankan setupRanking() dulu.");
+    return;
+  }
+  var ss    = SpreadsheetApp.openById(destId);
   var sheet = ss.getSheetByName("RANKING");
 
   if (!sheet) {
